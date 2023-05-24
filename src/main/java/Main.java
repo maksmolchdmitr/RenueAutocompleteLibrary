@@ -17,9 +17,8 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         String filterText = getString("Print filter text > ");
         Searcher searcher = new Searcher(RESOURCE_FILE, filterText);
-        String startName;
-        do {
-            startName = getString("Print start name text > ");
+        String startName = getString("Print start name text > ");
+        while (!startName.equals("!quit")) {
             long startTime = currentTimeMillis();
             List<RowData> rows = searcher.search(startName);
             long endTime = currentTimeMillis();
@@ -29,7 +28,8 @@ public class Main {
                     rows.size(),
                     endTime - startTime
             );
-        } while (!startName.equals("!quit"));
+            startName = getString("Print start name text > ");
+        }
     }
 
     private static String getString(String message) {
