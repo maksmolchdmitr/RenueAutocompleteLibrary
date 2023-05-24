@@ -16,7 +16,7 @@ public final class RowReader {
                 RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r")
         ) {
             randomAccessFile.seek(rowData.getBegin());
-            byte[] buffer = new byte[rowData.getEnd() - rowData.getBegin()];
+            byte[] buffer = new byte[rowData.getSize()];
             randomAccessFile.readFully(buffer);
             return new String(buffer);
         } catch (IOException e) {
