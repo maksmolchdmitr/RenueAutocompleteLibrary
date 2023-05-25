@@ -63,6 +63,7 @@ public class Trie<V> implements StringMap<V> {
 
     @Override
     public void add(String s, V value) {
+        s = s.toLowerCase();
         Node<V> node = this.root;
         for (char symbol : s.toCharArray()) {
             if (node.getChild(symbol) == null) {
