@@ -17,6 +17,9 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         String filterText = getString("Print filter text > ");
         Searcher searcher = new Searcher(RESOURCE_FILE, filterText);
+        printMemoryUsage();
+        System.gc();
+        printMemoryUsage();
         String startName = getString("Print start name text > ");
         while (!startName.equals("!quit")) {
             long startTime = currentTimeMillis();
@@ -27,6 +30,7 @@ public class Main {
                 String[] values = row.split(",");
                 out.printf("%s[%s]\n", values[1], row);
             });
+            System.gc();
             out.printf(
                     "Количество найденных строк: %d Время, затраченное на поиск: %d мс\n",
                     rows.size(),
@@ -34,6 +38,10 @@ public class Main {
             );
             startName = getString("Print start name text > ");
         }
+        printMemoryUsage();
+    }
+
+    private static void printMemoryUsage() {
         // Получаем экземпляр класса Runtime
         Runtime runtime = Runtime.getRuntime();
         // Вычисляем количество используемой памяти в мб

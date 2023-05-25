@@ -1,6 +1,6 @@
 import data.RowData;
+import structure.EconomicalTrie;
 import structure.StringMap;
-import structure.Trie;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.io.RandomAccessFile;
 import java.util.List;
 
 public final class Searcher {
-    private final StringMap<RowData> rowDataStringMap = new Trie<>();
+    private final StringMap<RowData> rowDataStringMap = new EconomicalTrie<>();
 
     public Searcher(File file, String filterText) {
         Filterer filterer = new Filterer(filterText);
