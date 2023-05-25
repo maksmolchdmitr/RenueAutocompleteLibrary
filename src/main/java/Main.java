@@ -22,7 +22,11 @@ public class Main {
             long startTime = currentTimeMillis();
             List<RowData> rows = searcher.search(startName);
             long endTime = currentTimeMillis();
-            rows.forEach(rowData -> out.println(ROW_READER.getRow(rowData)));
+            rows.forEach(rowData -> {
+                String row = ROW_READER.getRow(rowData);
+                String[] values = row.split(",");
+                out.printf("%s[%s]\n", values[1], row);
+            });
             out.printf(
                     "Количество найденных строк: %d Время, затраченное на поиск: %d мс\n",
                     rows.size(),
@@ -30,6 +34,11 @@ public class Main {
             );
             startName = getString("Print start name text > ");
         }
+        // Получаем экземпляр класса Runtime
+        Runtime runtime = Runtime.getRuntime();
+        // Вычисляем количество используемой памяти в мб
+        long usedMemory = (runtime.totalMemory() - runtime.freeMemory()) / (1024 * 1024);
+        System.out.println("Используемая память: " + usedMemory + " МБ");
     }
 
     private static String getString(String message) {
